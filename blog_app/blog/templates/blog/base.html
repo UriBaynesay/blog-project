@@ -26,8 +26,15 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="#">Login</a>
-              <a class="nav-item nav-link" href="#">Register</a>
+                {% if user.is_authenticated %}
+                    <form id="logout-form" method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="nav-item nav-link" type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link" href="#">Register</a>
+                {% endif %}
             </div>
           </div>
         </div>
